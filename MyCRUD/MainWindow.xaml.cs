@@ -88,10 +88,10 @@ namespace MyCRUD
                 {
                     SqlCommand cmd = new SqlCommand("INSERT INTO people (name,age,gender,city) VALUES (@Name,@Age,@Gender,@City);", _sqlConnection);
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("Name", name_txt.Text);
-                    cmd.Parameters.AddWithValue("Age", age_txt.Text);
-                    cmd.Parameters.AddWithValue("Gender", gender_txt.Text);
-                    cmd.Parameters.AddWithValue("City", city_txt.Text);
+                    cmd.Parameters.AddWithValue("@Name", name_txt.Text);
+                    cmd.Parameters.AddWithValue("@Age", age_txt.Text);
+                    cmd.Parameters.AddWithValue("@Gender", gender_txt.Text);
+                    cmd.Parameters.AddWithValue("@City", city_txt.Text);
                     _sqlConnection.Open();
                     cmd.ExecuteNonQuery();
                     _sqlConnection.Close();
@@ -112,15 +112,37 @@ namespace MyCRUD
 
             try
             {
-                    SqlCommand cmd = new SqlCommand("DELETE FROM people WHERE id = @Id;", _sqlConnection);
+                SqlCommand cmd = new SqlCommand("DELETE FROM people WHERE id = @Id;", _sqlConnection);
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("Id", id_txt.Text);
+                    cmd.Parameters.AddWithValue("@Id", id_txt.Text);
                     _sqlConnection.Open();
                     int res = cmd.ExecuteNonQuery();
                     if (res == 0) { throw new Exception("No such Id in DB"); }
-                    LoadGrid();
                     MessageBox.Show($"Deleted {res} line(s)", "Done", MessageBoxButton.OK, MessageBoxImage.Information);
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+            _sqlConnection.Close();
+            LoadGrid();
+            id_txt.Text = string.Empty;
+            }
+        }
+
+        private void UpdateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+            _sqlConnection.Open();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("UPDATE people set Name='").Append(name_txt.Text).Append("', Age = '").Append(age_txt.Text).Append("', Gender = '").Append(gender_txt.Text).Append("',City = '").Append(city_txt.Text).Append("' WHERE ID =").Append(id_txt.Text);
+                SqlCommand sqlCommand = new SqlCommand(sb.ToString(), _sqlConnection);
+                sqlCommand.ExecuteNonQuery();
+                MessageBox.Show($"Updated ID =  {id_txt.Text} ", "Done", MessageBoxButton.OK, MessageBoxImage.Information);
             } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -128,8 +150,13 @@ namespace MyCRUD
             finally
             {
                 _sqlConnection.Close();
+                LoadGrid();
+                ClearData();
                 id_txt.Text = string.Empty;
             }
+
+
+
         }
     }
 }

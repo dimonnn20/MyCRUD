@@ -18,7 +18,7 @@
         <TextBox x:Name="city_txt" HorizontalAlignment="Left" Margin="135,140,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="212" Height="20" FontSize="14"/>
         <DataGrid x:Name="datagrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="378,104,21,204"/>
         <Button x:Name="InsertBtn" Content="Insert Record" HorizontalAlignment="Left" Margin="83,337,0,0" VerticalAlignment="Top" Height="69" Width="113" FontSize="16" FontWeight="Bold" Background="#FFA73D3D" Foreground="#FFF9ECEC" Click="InsertBtn_Click"/>
-        <Button x:Name="UpdateBtn" Content="Update Record" HorizontalAlignment="Left" Margin="234,337,0,0" VerticalAlignment="Top" Height="69" Width="113" FontSize="16" FontWeight="Bold" Background="#FFA73D3D" Foreground="#FFF9ECEC"/>
+        <Button x:Name="UpdateBtn" Content="Update Record" HorizontalAlignment="Left" Margin="234,337,0,0" VerticalAlignment="Top" Height="69" Width="113" FontSize="16" FontWeight="Bold" Background="#FFA73D3D" Foreground="#FFF9ECEC" Click="UpdateBtn_Click"/>
         <Button x:Name="DeleteBtn" Content="Delete Record" HorizontalAlignment="Left" Margin="390,337,0,0" VerticalAlignment="Top" Height="69" Width="113" FontSize="16" FontWeight="Bold" Background="#FFA73D3D" Foreground="#FFF9ECEC" Click="DeleteBtn_Click"/>
         <Button x:Name="ClearBtn" Content="Clear Data" HorizontalAlignment="Left" Margin="563,337,0,0" VerticalAlignment="Top" Height="69" Width="113" FontSize="16" FontWeight="Bold" Background="#FFA73D3D" Foreground="#FFF9ECEC" Click="ClearBtn_Click"/>
         <TextBox x:Name="id_txt" HorizontalAlignment="Center" Margin="0,283,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="44" Height="20" FontSize="14"/>
